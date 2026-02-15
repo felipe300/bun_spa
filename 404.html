@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resource Not Found | Bun SPA</title>
+    <style>
+      :root {
+        --primary: #fbbf24; /* Bun-ish yellow/amber */
+        --text: #1f2937;
+        --bg: #ffffff;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        color: var(--text);
+      }
+      .container {
+        text-align: center;
+        padding: 2rem;
+        max-width: 450px;
+      }
+      .icon {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+      }
+      h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+      }
+      p {
+        color: #6b7280;
+        line-height: 1.5;
+        margin-top: 0.5rem;
+      }
+      .status-box {
+        margin-top: 2rem;
+        padding: 0.75rem;
+        background: #f3f4f6;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .spinner {
+        width: 12px;
+        height: 12px;
+        border: 2px solid #d1d5db;
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">🏗️</div>
+      <h1 id="msg">Build in progress</h1>
+      <p id="sub">
+        We're either generating your application or the requested route doesn't exist yet.
+      </p>
+
+      <div class="status-box">
+        <div class="spinner"></div>
+        <span id="status">Waiting for Bun server...</span>
+      </div>
+    </div>
+
+    <script>
+      const statusEl = document.getElementById("status");
+
+      async function checkAvailability() {
+        try {
+          // We check the root to see if the main bundle is ready
+          const res = await fetch("/", { method: "HEAD" });
+          if (res.ok) {
+            statusEl.innerText = "Build ready! Reloading...";
+            window.location.reload();
+          }
+        } catch (e) {
+          // Server is likely restarting due to --watch
+          statusEl.innerText = "Syncing with Bun...";
+        }
+      }
+
+      // Poll every 1000ms
+      setInterval(checkAvailability, 1000);
+    </script>
+  </body>
+</html>

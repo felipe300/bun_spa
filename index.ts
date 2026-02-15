@@ -1,25 +1,27 @@
+import { logger } from "./src/utils/logger";
+
 const server = Bun.serve({
   port: 3000,
   async fetch(req) {
     const url = new URL(req.url);
     const path = url.pathname === "/" ? "/index.html" : url.pathname;
-    const filePath = `./dist${path}`;
 
-    const file = Bun.file(filePath);
+    const file = Bun.file(`./dist${path}`);
+    const fallbackFile = Bun.file("./dist/index.html");
+    const buildErrorFile = Bun.file("./404.html");
 
+    logger.info(`${req.method} → ${url.pathname}`);
     if (await file.exists()) {
       return new Response(file);
     }
 
-    const indexFile = Bun.file("./dist/index.html");
-    if (await indexFile.exists()) {
-      return new Response(indexFile);
+    if (await fallbackFile.exists()) {
+      return new Response(fallbackFile);
     }
 
-    return new Response("🏗️ El build se está generando... recarga en un segundo.", {
-      headers: { "Content-Type": "text/html; charset=utf-8" },
-    });
+    logger.warn(`Assets not ready. Serving 404.html for: ${url.pathname}`);
+    return new Response(buildErrorFile);
   },
 });
 
-console.log(`🚀 Servidor en http://localhost:${server.port}`);
+logger.info(`🚀 Server running at http://localhost:${server.port}`);
