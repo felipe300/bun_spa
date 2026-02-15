@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bun + Alpine + Oxc</title>
+  </head>
+  <body>
+    <div x-data="{ count: 0 }">
+      <button @click="count++">Incrementar</button>
+      <span x-text="count"></span>
+    </div>
+
+    <script src="./src/main.ts" type="module"></script>
+  </body>
+</html>
