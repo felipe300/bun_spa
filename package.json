@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "bun run build && bun run --parallel dev:server dev:watch",
     "dev:server": "bun --watch index.ts",
-    "dev:build": "bun build ./src/main.ts --outdir ./dist --watch",
-    "build": "bun build ./src/main.ts --outdir ./dist",
+    "dev:watch": "bun build ./src/main.ts --outdir ./dist --watch",
+    "build": "mkdir -p dist && cp index.html dist/ && bun build ./src/main.ts --outdir ./dist",
     "lint": "oxlint .",
     "format": "oxlint --format .",
     "fix": "oxlint --fix ."
