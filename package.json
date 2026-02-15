@@ -4,7 +4,10 @@
   "type": "module",
   "module": "index.ts",
   "scripts": {
-    "dev": "bun run index.ts",
+    "dev": "bun run build && bun run --parallel dev:server dev:watch",
+    "dev:server": "bun --watch index.ts",
+    "dev:build": "bun build ./src/main.ts --outdir ./dist --watch",
+    "build": "bun build ./src/main.ts --outdir ./dist",
     "lint": "oxlint .",
     "format": "oxlint --format .",
     "fix": "oxlint --fix ."

@@ -1,6 +1,7 @@
 import Alpine from "alpinejs";
 
-// Opcional: Registrar componentes o datos globales
 window.Alpine = Alpine;
 
 Alpine.start();
+
+console.log("Alpine.js cargado correctamente");
