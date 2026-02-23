@@ -1,0 +1,19 @@
+name: Quality Check
+
+on: workflow_call
+
+jobs:
+  lint-and-fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run Oxlint (The Fast One)
+        run: bun run lint
+
+      - name: Check Format
+        run: bun run fix

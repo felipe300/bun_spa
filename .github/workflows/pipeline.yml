@@ -1,0 +1,15 @@
+name: Project Pipeline
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    uses: ./.github/workflows/check-quality.yml
+
+  build:
+    needs: quality
+    uses: ./.github/workflows/build-app.yml

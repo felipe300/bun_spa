@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "bun run build && bun run --parallel dev:server dev:watch",
     "dev:server": "bun --watch index.ts",
-    "dev:watch": "bun build ./src/main.ts --outdir ./dist --watch --minify-whitespace",
-    "build": "mkdir -p dist && cp index.html dist/ && bun build ./src/main.ts --outdir ./dist",
+    "dev:watch": "bun build ./src/main.ts --outdir ./dist --watch --minify",
+    "build": "rm -rf dist && mkdir -p dist && cp index.html dist/ && bun build ./src/main.ts --outdir ./dist --minify",
     "lint": "oxlint .",
-    "format": "oxlint --format .",
-    "fix": "oxlint --fix ."
+    "fix": "oxlint --fix .",
+    "preview": "NODE_ENV=production bun index.ts"
   },
   "dependencies": {
     "alpinejs": "^3.15.8",

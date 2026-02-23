@@ -1,0 +1,23 @@
+name: Build SPA
+
+on:
+  workflow_call:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+
+      - name: Install
+        run: bun install
+
+      - name: Build JS/TS
+        run: bun run build
+
+      - name: Save Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: spa-dist
+          path: dist/
