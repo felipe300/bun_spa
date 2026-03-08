@@ -1,6 +1,6 @@
 import { logger } from "./src/utils/logger";
 
-const server = Bun.serve({
+export const server = Bun.serve({
   port: 3000,
   async fetch(req) {
     const url = new URL(req.url);
@@ -24,4 +24,6 @@ const server = Bun.serve({
   },
 });
 
-logger.info(`🚀 Server running at http://localhost:${server.port}`);
+if (import.meta.main) {
+  logger.info(`🚀 Server running at http://localhost:${server.port}`);
+}

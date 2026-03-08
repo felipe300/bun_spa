@@ -4,12 +4,12 @@ Este proyecto es una prueba de concepto (PoC) centrada en el rendimiento y la si
 
 ## Stack Tecnológico
 
-| Herramienta | Función                 | ¿Por qué esta combinación?                                                                                  |
-| ----------- | ----------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Bun         | "Runtime, Bundler & PM" | Reemplaza a Node.js y npm. Es increíblemente rápido para instalar paquetes y empaquetar archivos.           |
-| Alpine.js   | Frontend Framework      | Ofrece la reactividad de Vue o React pero con un peso mínimo y sin la complejidad de un Virtual DOM pesado. |
-| Oxlint      | Linter                  | "Escrito en Rust. Detecta errores en el código casi instantáneamente, eliminando las pausas de ESLint."     |
-| Oxfmt (Oxc) | Formateador             | Mantiene el estilo del código coherente con una velocidad de ejecución imperceptible.                       |
+| Herramienta | Función                 | ¿Por qué esta combinación?                                                                        |
+| ----------- | ----------------------- | ------------------------------------------------------------------------------------------------- |
+| Bun         | "Runtime, Bundler & PM" | Reemplaza a Node.js y npm. Es increíblemente rápido para instalar paquetes y empaquetar archivos. |
+| Alpine.js   | Frontend Framework      | Ofrece la reactividad pero con un peso mínimo y sin la complejidad de un Virtual DOM pesado.      |
+| Oxlint      | Linter                  | Detecta errores en el código casi instantáneamente, eliminando las pausas de ESLint.              |
+| Oxfmt (Oxc) | Formateador             | Mantiene el estilo del código coherente con una velocidad de ejecución imperceptible.             |
 
 ## ¿Cómo funcionan juntas?
 

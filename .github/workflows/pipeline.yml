@@ -2,7 +2,7 @@ name: Project Pipeline
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, dev, test/devops-flow]
   pull_request:
     branches: [main]
 
@@ -13,3 +13,19 @@ jobs:
   build:
     needs: quality
     uses: ./.github/workflows/build-app.yml
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/deploy-docker.yml
+
+  notify:
+    needs: [quality, build, deploy]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify n8n
+        run: |
+          curl -X POST http://tu-ip-local:5678/webhook/devops-status \
+          -H "Content-Type: application/json" \
+          -d '{"project": "bun_spa", "status": "${{ job.status }}"}'
+    continue-on-error: true
