@@ -2,6 +2,7 @@ name: Deploy Docker
 
 on:
   workflow_call:
+  pull_request:
 
 jobs:
   push-image:

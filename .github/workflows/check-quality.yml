@@ -1,6 +1,8 @@
 name: Quality Check
 
-on: workflow_call
+on:
+  workflow_call:
+  pull_request:
 
 jobs:
   lint-and-fmt:
